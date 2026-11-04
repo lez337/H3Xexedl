@@ -6,7 +6,17 @@ The small black setup downloads the latest application package from this reposit
 
 After installation, run the same setup again to repair or update H3X. Close H3X before repairing or uninstalling. Your saved workspace and settings are retained.
 
-Version 2.4.4 includes the Telegram login fix for account data-center redirects. Requires Windows x64 and .NET Framework 4.8.
+Version 2.4.5 improves Telegram verification-code delivery instructions, formatted and SMS text codes, explicit resend, email verification, and two-step authentication. It retains the data-center redirect fix. Requires Windows x64 and .NET Framework 4.8.
+
+## Telegram connection
+
+After updating, open Telegram settings in H3X and click **Recommencer**, then **Recevoir le code**. The API ID and API Hash identify your Telegram application; the login verification code is a separate value delivered by Telegram.
+
+H3X now shows the delivery method reported by Telegram: an existing Telegram session, SMS, email, or a call. If the code is sent to Telegram, open the official Telegram conversation on your phone or another connected device. If Telegram offers another delivery method, use the resend button after its countdown. Some account verification steps must be completed in Telegram's official mobile app; H3X explains this when Telegram reports that requirement.
+
+When Telegram asks for two-step authentication, enter only your Telegram password in the password step. H3X does not resubmit the already accepted code.
+
+The login flows have automated tests with simulated Telegram responses. Actual code delivery still requires verification with your account. See [Telegram's authorization documentation](https://core.telegram.org/api/auth).
 
 ## Release files
 
@@ -17,7 +27,7 @@ Publish these four files together in a normal, latest GitHub Release:
 - `h3x-release.json` — the exact versioned package URL, byte size and SHA-256 checksum.
 - `SHA256SUMS.txt` — checksums for the published files.
 
-The release tag must be `v<version>` and match the manifest, for example `v2.4.4`. Drafts and prereleases do not feed the setup's `latest` URL.
+The release tag must be `v<version>` and match the manifest, for example `v2.4.5`. Drafts and prereleases do not feed the setup's `latest` URL.
 
 ## Publishing the next update
 

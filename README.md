@@ -6,9 +6,22 @@ The small black setup downloads the latest application package from this reposit
 
 After installation, run the same setup again to repair or update H3X. Close H3X before repairing or uninstalling. Your saved workspace and settings are retained.
 
-Version 2.4.5 improves Telegram verification-code delivery instructions, formatted and SMS text codes, explicit resend, email verification, and two-step authentication. It retains the data-center redirect fix. Requires Windows x64 and .NET Framework 4.8.
+Version 2.4.6 adds Telegram's supported QR login, while retaining code login and the earlier authentication fixes. Requires Windows x64 and .NET Framework 4.8.
 
 ## Telegram connection
+
+### QR login
+
+1. Close H3X and run Setup → **Repair / Update** to install version 2.4.6 or newer.
+2. Open H3X's Telegram integrations and choose **Connexion par QR**. Previously saved API app credentials are reused. On first use, enter your own API ID and API Hash from [my.telegram.org/apps](https://my.telegram.org/apps).
+3. On your phone, open Telegram → **Settings → Devices → Link Desktop Device**. Scan the QR shown in H3X and approve the H3X session.
+4. If requested, enter your Telegram two-step password in H3X.
+
+The QR image is generated locally and refreshes automatically during the three-minute login window. This flow does not request a code message. Cancelling or leaving the login panel stops the pending QR connection. An approved session uses H3X's existing protected storage.
+
+The QR flow, worker transport and packaged storage have automated tests with simulated logins. A real account still needs the user's scan and approval. See [Telegram's QR-login protocol](https://core.telegram.org/api/qr-login).
+
+### Code login
 
 After updating, open Telegram settings in H3X and click **Recommencer**, then **Recevoir le code**. The API ID and API Hash identify your Telegram application; the login verification code is a separate value delivered by Telegram.
 
@@ -27,7 +40,7 @@ Publish these four files together in a normal, latest GitHub Release:
 - `h3x-release.json` — the exact versioned package URL, byte size and SHA-256 checksum.
 - `SHA256SUMS.txt` — checksums for the published files.
 
-The release tag must be `v<version>` and match the manifest, for example `v2.4.5`. Drafts and prereleases do not feed the setup's `latest` URL.
+The release tag must be `v<version>` and match the manifest, for example `v2.4.6`. Drafts and prereleases do not feed the setup's `latest` URL.
 
 ## Publishing the next update
 

@@ -6,7 +6,7 @@ The small black setup downloads the latest application package from this reposit
 
 Install version 2.4.7 once with Setup → **Repair / Update** to enable in-app updates. Close H3X before using Setup. Your saved workspace and settings are retained.
 
-Version 2.4.7 adds startup update checks and downloads, a persistent off switch, and combined BrixHub search filters. Telegram QR login and earlier authentication fixes are included. Requires Windows x64 and .NET Framework 4.8.
+Version 2.4.8 adds OathNet search filters, date ranges, sorting and page-size controls. Startup updates, the persistent off switch, BrixHub filters and Telegram QR login are included. Requires Windows x64 and .NET Framework 4.8.
 
 ## Automatic updates
 
@@ -15,6 +15,20 @@ The installed Windows app checks the latest GitHub release at startup and downlo
 Click **Installer et redémarrer** when ready. H3X saves the workspace, closes, updates the same installation folder and restarts. It never forces a restart or installs an older version.
 
 To turn automatic checks and downloads off, open **Paramètres → Intégrations → Mises à jour** and disable **Mises à jour automatiques au démarrage**. The switch saves immediately. **Vérifier maintenant** still works when automatic updates are off. A temporary connection failure does not prevent startup. Portable and development builds use Setup.
+
+## OathNet filters
+
+Select OathNet in Search, choose the search mode, and expand **Filtres supplémentaires OathNet**.
+
+- Common filters: email, email domain, username, phone, IP, Discord ID, country ISO code and city.
+- Breach records: first name, last name, full name, region, postal code and source database.
+- Exposure summaries: domain, subdomain, operating system, service and antivirus.
+
+Set an inclusive date range using the indexing or compromise date. Choose relevance or index-date sorting, enable wildcard patterns when needed, and use the provider's default page size or 20, 50, 100 or 200 results per section.
+
+Each report keeps its filter settings when you load the next page, using the same search session. A new main query clears previous filters. Invalid settings are rejected before initializing a session. Enrichment mode uses the main query without these search filters.
+
+See [OathNet's structured-filter guide](https://docs.oathnet.org/guides/structured-filters) and [API reference](https://docs.oathnet.org/api-reference/v2-breach/search-breach-records). Automated tests use simulated provider responses and do not consume account lookups.
 
 ## BrixHub filters
 
@@ -56,7 +70,7 @@ Publish these four files together in a normal, latest GitHub Release:
 - `h3x-release.json` — the exact versioned package URL, byte size and SHA-256 checksum.
 - `SHA256SUMS.txt` — checksums for the published files.
 
-The release tag must be `v<version>` and match the manifest, for example `v2.4.7`. Drafts and prereleases do not feed the setup's `latest` URL.
+The release tag must be `v<version>` and match the manifest, for example `v2.4.8`. Drafts and prereleases do not feed the setup's `latest` URL.
 
 ## Publishing the next update
 
@@ -75,5 +89,7 @@ Share the same permanent download link for every update:
 Setup and the installed app use the same latest-release manifest. Publishing the four assets makes the new version available to startup update checks. No GitHub token is embedded in the setup or app.
 
 See [GitHub's release guide](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) and [permanent release links](https://docs.github.com/en/repositories/releasing-projects-on-github/linking-to-releases).
+
+
 
 

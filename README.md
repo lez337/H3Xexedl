@@ -4,9 +4,25 @@
 
 The small black setup downloads the latest application package from this repository's public Releases. It includes the centered H3X logo, an installation-folder choice, download progress, Repair / Update, and Uninstall. The package size and SHA-256 checksum are verified before installation.
 
-After installation, run the same setup again to repair or update H3X. Close H3X before repairing or uninstalling. Your saved workspace and settings are retained.
+Install version 2.4.7 once with Setup → **Repair / Update** to enable in-app updates. Close H3X before using Setup. Your saved workspace and settings are retained.
 
-Version 2.4.6 adds Telegram's supported QR login, while retaining code login and the earlier authentication fixes. Requires Windows x64 and .NET Framework 4.8.
+Version 2.4.7 adds startup update checks and downloads, a persistent off switch, and combined BrixHub search filters. Telegram QR login and earlier authentication fixes are included. Requires Windows x64 and .NET Framework 4.8.
+
+## Automatic updates
+
+The installed Windows app checks the latest GitHub release at startup and downloads newer versions in the background. A progress banner shows the download; size and SHA-256 are verified before installation.
+
+Click **Installer et redémarrer** when ready. H3X saves the workspace, closes, updates the same installation folder and restarts. It never forces a restart or installs an older version.
+
+To turn automatic checks and downloads off, open **Paramètres → Intégrations → Mises à jour** and disable **Mises à jour automatiques au démarrage**. The switch saves immediately. **Vérifier maintenant** still works when automatic updates are off. A temporary connection failure does not prevent startup. Portable and development builds use Setup.
+
+## BrixHub filters
+
+In Search, select BrixHub and expand **Filtres supplémentaires**. Combine the main query with name, username, email, phone, mobile, IP, Discord ID, city, postal code, department, region, country, company, profession and role filters. Blank fields are omitted; invalid or conflicting fields are rejected before sending a request.
+
+Choose 10, 20, 50 or 100 results per page. Filters and page size remain applied when you explicitly load the next page. Changing the main query clears the previous additional filters.
+
+These fields use the [documented BrixHub search API](https://brixhub.to/api). No automatic pagination is performed.
 
 ## Telegram connection
 
@@ -40,7 +56,7 @@ Publish these four files together in a normal, latest GitHub Release:
 - `h3x-release.json` — the exact versioned package URL, byte size and SHA-256 checksum.
 - `SHA256SUMS.txt` — checksums for the published files.
 
-The release tag must be `v<version>` and match the manifest, for example `v2.4.6`. Drafts and prereleases do not feed the setup's `latest` URL.
+The release tag must be `v<version>` and match the manifest, for example `v2.4.7`. Drafts and prereleases do not feed the setup's `latest` URL.
 
 ## Publishing the next update
 
@@ -56,6 +72,8 @@ Share the same permanent download link for every update:
 
 [H3X-Setup.exe](https://github.com/lez337/H3Xexedl/releases/latest/download/H3X-Setup.exe)
 
-Setup checks the latest release when the user chooses Install or Repair / Update. It does not silently update the app in the background. No GitHub token is embedded in the setup.
+Setup and the installed app use the same latest-release manifest. Publishing the four assets makes the new version available to startup update checks. No GitHub token is embedded in the setup or app.
 
 See [GitHub's release guide](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) and [permanent release links](https://docs.github.com/en/repositories/releasing-projects-on-github/linking-to-releases).
+
+

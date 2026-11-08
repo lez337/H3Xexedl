@@ -4,9 +4,9 @@
 
 The small black setup downloads the latest application package from this repository's public Releases. It includes the centered H3X logo, an installation-folder choice, download progress, Repair / Update, and Uninstall. The package size and SHA-256 checksum are verified before installation.
 
-Install version 2.4.7 once with Setup → **Repair / Update** to enable in-app updates. Close H3X before using Setup. Your saved workspace and settings are retained.
+Install version 2.5.0 once with Setup → **Repair / Update** to enable in-app updates. Close H3X before using Setup. Your saved workspace and settings are retained.
 
-Version 2.4.8 adds OathNet search filters, date ranges, sorting and page-size controls. Startup updates, the persistent off switch, BrixHub filters and Telegram QR login are included. Requires Windows x64 and .NET Framework 4.8.
+Version 2.5.0 expands BrixHub and OathNet filters, adds clickable Telegram links and address actions, links map locations to person records, and adds a Google public-profile card when GHunt returns one. Startup updates, the persistent off switch and Telegram QR login are included. Requires Windows x64 and .NET Framework 4.8.
 
 ## Automatic updates
 
@@ -16,6 +16,12 @@ Click **Installer et redémarrer** when ready. H3X saves the workspace, closes, 
 
 To turn automatic checks and downloads off, open **Paramètres → Intégrations → Mises à jour** and disable **Mises à jour automatiques au démarrage**. The switch saves immediately. **Vérifier maintenant** still works when automatic updates are off. A temporary connection failure does not prevent startup. Portable and development builds use Setup.
 
+## Maps, Telegram links and Google profiles
+
+Telegram result links open in the browser. Address fields have a **Carte** button: choose the matching place and optionally link the point to a saved dossier/person. In the map, choose a person to show all their locations; existing points can also be assigned to a person.
+
+Email searches show a left-side Google card when configured and authenticated GHunt returns public profile data. It can show a display name, photo and a link to public Google Maps contributions/reviews. A display name is not a verified legal name. No profile or review availability is guaranteed. Geocoding uses the existing Photon/OpenStreetMap service.
+
 ## OathNet filters
 
 Select OathNet in Search, choose the search mode, and expand **Filtres supplémentaires OathNet**.
@@ -23,6 +29,9 @@ Select OathNet in Search, choose the search mode, and expand **Filtres suppléme
 - Common filters: email, email domain, username, phone, IP, Discord ID, country ISO code and city.
 - Breach records: first name, last name, full name, region, postal code and source database.
 - Exposure summaries: domain, subdomain, operating system, service and antivirus.
+- Expanded supported identity/social/gaming fields, breach age and birth-date ranges, and endpoint-specific advanced controls are also available.
+
+Password search fields are masked and omitted from saved request metadata. Reports using these fields must be searched again after reopening before fetching additional pages. This release does not resolve provider-side HTTP 403 or Cloudflare access challenges.
 
 Set an inclusive date range using the indexing or compromise date. Choose relevance or index-date sorting, enable wildcard patterns when needed, and use the provider's default page size or 20, 50, 100 or 200 results per section.
 
@@ -32,9 +41,11 @@ See [OathNet's structured-filter guide](https://docs.oathnet.org/guides/structur
 
 ## BrixHub filters
 
-In Search, select BrixHub and expand **Filtres supplémentaires**. Combine the main query with name, username, email, phone, mobile, IP, Discord ID, city, postal code, department, region, country, company, profession and role filters. Blank fields are omitted; invalid or conflicting fields are rejected before sending a request.
+In Search, select BrixHub and expand **Filtres supplémentaires**. All 43 documented BrixHub search fields are available, including names, contact information, birth-date components, address, company, vehicle and supported gaming identifiers. Blank fields are omitted; invalid or conflicting fields are rejected before sending a request.
 
 Choose 10, 20, 50 or 100 results per page. Filters and page size remain applied when you explicitly load the next page. Changing the main query clears the previous additional filters.
+
+The report sidebar includes an exact-age filter for **loaded results**. It uses a reported age or calculates age from a complete valid birth date; year-only and unknown dates are excluded. BrixHub has no documented native age parameter. Use birth-date fields before search when needed.
 
 These fields use the [documented BrixHub search API](https://brixhub.to/api). No automatic pagination is performed.
 
@@ -70,7 +81,7 @@ Publish these four files together in a normal, latest GitHub Release:
 - `h3x-release.json` — the exact versioned package URL, byte size and SHA-256 checksum.
 - `SHA256SUMS.txt` — checksums for the published files.
 
-The release tag must be `v<version>` and match the manifest, for example `v2.4.8`. Drafts and prereleases do not feed the setup's `latest` URL.
+The release tag must be `v<version>` and match the manifest, for example `v2.5.0`. Drafts and prereleases do not feed the setup's `latest` URL.
 
 ## Publishing the next update
 

@@ -4,9 +4,9 @@
 
 The small black setup downloads the latest application package from this repository's public Releases. It includes the centered H3X logo, an installation-folder choice, download progress, Repair / Update, and Uninstall. The package size and SHA-256 checksum are verified before installation.
 
-Install version 2.5.1 once with Setup → **Repair / Update** to enable in-app updates. Close H3X before using Setup. Your saved workspace and settings are retained.
+Install version 2.5.2 once with Setup → **Repair / Update** to enable in-app updates. Close H3X before using Setup. Your saved workspace and settings are retained.
 
-Version 2.5.1 adds a prominent live update-download card with percentage, downloaded/total size, progress stages and cancel/install controls. It also expands BrixHub and OathNet filters, adds clickable Telegram links and address actions, links map locations to person records, and adds a Google public-profile card when GHunt returns one. Startup updates, the persistent off switch and Telegram QR login are included. Requires Windows x64 and .NET Framework 4.8.
+Version 2.5.2 fixes local GHunt integration for the Python CLI, main.py and source folders. Version 2.5.1 adds a prominent live update-download card with percentage, downloaded/total size, progress stages and cancel/install controls. It also expands BrixHub and OathNet filters, adds clickable Telegram links and address actions, links map locations to person records, and adds a Google public-profile card when GHunt returns one. Startup updates, the persistent off switch and Telegram QR login are included. Requires Windows x64 and .NET Framework 4.8.
 
 ## Automatic updates
 
@@ -15,6 +15,25 @@ The installed Windows app checks the latest GitHub release at startup and downlo
 Click **Installer et redémarrer** when ready. H3X saves the workspace, closes, updates the same installation folder and restarts. It never forces a restart or installs an older version.
 
 To turn automatic checks and downloads off, open **Paramètres → Intégrations → Mises à jour** and disable **Mises à jour automatiques au démarrage**. The switch saves immediately. **Vérifier maintenant** still works when automatic updates are off. A temporary connection failure does not prevent startup. Portable and development builds use Setup.
+
+## Local GHunt setup
+
+GHunt is a Python CLI, not a standalone desktop application. Follow [GHunt's official installation and authentication instructions](https://github.com/mxrch/GHunt).
+
+Recommended installation in a terminal:
+
+```text
+python -m pip install pipx
+pipx ensurepath
+pipx install ghunt
+ghunt login
+```
+
+Complete authentication with GHunt Companion, then restart H3X so it can see the updated PATH.
+
+In **Settings → Local tools**, leave **Commande GHunt ou script main.py** empty to use the installed `ghunt` command. You can also enter a launcher path, select the source repository's `main.py`, or enter its folder. For source mode, choose the Python interpreter from the environment containing GHunt's dependencies. Authenticate in that same environment with `python main.py login` (using that interpreter).
+
+H3X invokes `ghunt email <address> --json <temporary-output>`, or its equivalent through Python for source mode. No shell is used. GHunt and its Google session are not bundled or automatically installed; do not paste Google cookies into H3X. Availability checks run CLI help only and do not verify the Google session.
 
 ## Maps, Telegram links and Google profiles
 
@@ -81,7 +100,7 @@ Publish these four files together in a normal, latest GitHub Release:
 - `h3x-release.json` — the exact versioned package URL, byte size and SHA-256 checksum.
 - `SHA256SUMS.txt` — checksums for the published files.
 
-The release tag must be `v<version>` and match the manifest, for example `v2.5.1`. Drafts and prereleases do not feed the setup's `latest` URL.
+The release tag must be `v<version>` and match the manifest, for example `v2.5.2`. Drafts and prereleases do not feed the setup's `latest` URL.
 
 ## Publishing the next update
 

@@ -4,13 +4,13 @@
 
 The small black setup downloads the latest application package from this repository's public Releases. It includes the centered H3X logo, an installation-folder choice, download progress, Repair / Update, and Uninstall. The package size and SHA-256 checksum are verified before installation.
 
-Install version 2.5.0 once with Setup → **Repair / Update** to enable in-app updates. Close H3X before using Setup. Your saved workspace and settings are retained.
+Install version 2.5.1 once with Setup → **Repair / Update** to enable in-app updates. Close H3X before using Setup. Your saved workspace and settings are retained.
 
-Version 2.5.0 expands BrixHub and OathNet filters, adds clickable Telegram links and address actions, links map locations to person records, and adds a Google public-profile card when GHunt returns one. Startup updates, the persistent off switch and Telegram QR login are included. Requires Windows x64 and .NET Framework 4.8.
+Version 2.5.1 adds a prominent live update-download card with percentage, downloaded/total size, progress stages and cancel/install controls. It also expands BrixHub and OathNet filters, adds clickable Telegram links and address actions, links map locations to person records, and adds a Google public-profile card when GHunt returns one. Startup updates, the persistent off switch and Telegram QR login are included. Requires Windows x64 and .NET Framework 4.8.
 
 ## Automatic updates
 
-The installed Windows app checks the latest GitHub release at startup and downloads newer versions in the background. A progress banner shows the download; size and SHA-256 are verified before installation.
+The installed Windows app checks the latest GitHub release at startup and downloads newer versions in the background. A download card remains visible while downloading and shows the new version, progress bar, percentage, downloaded/total size, and update stages. You can keep using H3X or cancel the download. Size and SHA-256 are verified before installation. Install version 2.5.1 to use this card for subsequent updates.
 
 Click **Installer et redémarrer** when ready. H3X saves the workspace, closes, updates the same installation folder and restarts. It never forces a restart or installs an older version.
 
@@ -81,7 +81,7 @@ Publish these four files together in a normal, latest GitHub Release:
 - `h3x-release.json` — the exact versioned package URL, byte size and SHA-256 checksum.
 - `SHA256SUMS.txt` — checksums for the published files.
 
-The release tag must be `v<version>` and match the manifest, for example `v2.5.0`. Drafts and prereleases do not feed the setup's `latest` URL.
+The release tag must be `v<version>` and match the manifest, for example `v2.5.1`. Drafts and prereleases do not feed the setup's `latest` URL.
 
 ## Publishing the next update
 
